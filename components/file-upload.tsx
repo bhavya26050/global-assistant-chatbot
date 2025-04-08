@@ -57,7 +57,7 @@ export default function FileUpload({ onFileUpload, onCancel }: FileUploadProps) 
       }, 300)
 
       // Upload file
-      const fileUrl = await onFileUpload(file)
+      await onFileUpload(file)
 
       // Clear interval and set as uploaded
       clearInterval(progressInterval)
@@ -72,7 +72,11 @@ export default function FileUpload({ onFileUpload, onCancel }: FileUploadProps) 
       }, 1000)
     } catch (error) {
       console.error("File upload error:", error)
-      setError(error.message || "Upload failed. Please try again.")
+      if (error instanceof Error) {
+        setError(error.message || "Upload failed. Please try again.")
+      } else {
+        setError("Upload failed. Please try again.")
+      }
       setFileUpload((prev) =>
         prev
           ? {
@@ -133,7 +137,7 @@ export default function FileUpload({ onFileUpload, onCancel }: FileUploadProps) 
             <div className="mb-2 rounded overflow-hidden">
               <img
                 src={fileUpload.preview || "/placeholder.svg"}
-                alt="Preview"
+                alt="File preview"
                 className="max-h-40 max-w-full object-contain"
               />
             </div>

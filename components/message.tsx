@@ -9,10 +9,9 @@ import type { Message as MessageType } from "@/types"
 
 interface MessageProps {
   message: MessageType
-  isLast: boolean
 }
 
-export default function Message({ message, isLast }: MessageProps) {
+export default function Message({ message }: MessageProps) {
   const [copied, setCopied] = useState(false)
 
   const copyToClipboard = () => {

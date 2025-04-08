@@ -19,6 +19,11 @@ interface ChatInterfaceProps {
   isDemoMode?: boolean
 }
 
+interface MessageProps {
+  message: MessageType
+  isLast?: boolean
+}
+
 export default function ChatInterface({
   userSettings,
   onSendMessage,
@@ -58,7 +63,7 @@ export default function ChatInterface({
         },
       ])
     }
-  }, [isDemoMode])
+  }, [isDemoMode, messages.length]) // Add messages.length to the dependency array
 
   // Scroll to bottom when messages change
   useEffect(() => {

@@ -11,16 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Settings, User, LogOut, HelpCircle, Globe, AlertTriangle } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import type { UserSettings } from "@/types"
 
 interface HeaderProps {
-  userSettings: UserSettings
   onSettingsClick: () => void
   onProfileClick: () => void
   isDemoMode?: boolean
 }
 
-export default function Header({ userSettings, onSettingsClick, onProfileClick, isDemoMode = false }: HeaderProps) {
+export default function Header({ onSettingsClick, onProfileClick, isDemoMode = false }: HeaderProps) {
   return (
     <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-10">
       <div className="container flex h-16 items-center justify-between py-4">

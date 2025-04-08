@@ -12,6 +12,13 @@ import { AlertCircle, Info } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import type { UserSettings } from "@/types"
 
+export interface HeaderProps {
+  onSettingsClick: () => void
+  onProfileClick: () => void
+  isDemoMode: boolean
+  userSettings: UserSettings // Added userSettings property
+}
+
 export default function Home() {
   // State
   const [settingsOpen, setSettingsOpen] = useState(false)
@@ -55,9 +62,9 @@ export default function Home() {
         console.error("API Key validation error:", error)
 
         // Check if it's an expired key error
-        if (error.message?.includes("API key expired")) {
+        if (error instanceof Error && error.message?.includes("API key expired")) {
           setApiKeyError("Your Gemini API key has expired. Please renew it at https://aistudio.google.com/app/apikey")
-        } else if (error.message?.includes("API_KEY_INVALID")) {
+        } else if (error instanceof Error && error.message?.includes("API_KEY_INVALID")) {
           setApiKeyError("Invalid Gemini API key. Please check your key and try again.")
         } else {
           setApiKeyError("Error connecting to Gemini API. Please check your internet connection and try again.")
@@ -126,7 +133,7 @@ export default function Home() {
       console.error("Gemini API Error:", error)
 
       // Check if it's an expired key error during runtime
-      if (error.message?.includes("API key expired")) {
+      if (error instanceof Error && error.message?.includes("API key expired")) {
         setApiKeyError("Your Gemini API key has expired. Please renew it at https://aistudio.google.com/app/apikey")
         // Automatically switch to demo mode
         setIsDemoMode(true)
@@ -181,7 +188,7 @@ export default function Home() {
             <Info className="h-4 w-4" />
             <AlertTitle>Demo Mode Active</AlertTitle>
             <AlertDescription>
-              You're using the app in demo mode with simulated AI responses. To get full functionality, please renew
+              You&apos;re using the app in demo mode with simulated AI responses. To get full functionality, please renew
               your Gemini API key at{" "}
               <a
                 href="https://aistudio.google.com/app/apikey"
