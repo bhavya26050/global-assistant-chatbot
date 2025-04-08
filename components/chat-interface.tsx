@@ -63,7 +63,7 @@ export default function ChatInterface({
         },
       ])
     }
-  }, [isDemoMode, messages.length]) // Add messages.length to the dependency array
+  }, [isDemoMode, messages.length]) // Added messages.length to the dependency array
 
   // Scroll to bottom when messages change
   useEffect(() => {

@@ -137,7 +137,7 @@ export default function FileUpload({ onFileUpload, onCancel }: FileUploadProps) 
             <div className="mb-2 rounded overflow-hidden">
               <img
                 src={fileUpload.preview || "/placeholder.svg"}
-                alt="File preview"
+                alt={fileUpload.file.name || "File preview"}
                 className="max-h-40 max-w-full object-contain"
               />
             </div>
